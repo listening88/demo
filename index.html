@@ -1,0 +1,307 @@
+<!doctype html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <title>App运营管理</title>
+    <link rel="stylesheet" href="css/appStyle.css" type="text/css">
+    <link rel="stylesheet" href="css/jquery.mCustomScrollbar.css">
+</head>
+
+<body>
+    <div class="shops">
+        <div class="sortable1">
+            <div class="btn-row clearfix">
+                <div class="sh_title left">运营公司LOGO</div>
+                <div class="fileup left">
+                    <input type="file" class="upbtn" id="file" onchange="upFile()">
+                    <input type="button" value="上传图片" class="btn btn-success">
+                    <img src="" class="upimg" id="show">
+                    <div class="shop_btns">
+                        <input type="button" class="btn btn-primary" value="保存">
+                        <input type="button" class="btn btn-default" value="取消">
+                    </div>
+                </div>
+            </div>
+            <div class="btn-row clearfix">
+                <div class="sh_title left">轮播图</div>
+                <div class="left">
+                    <input type="button" value="查看详情" class="btn btn-primary">
+                    <img src="" class="upimg" id="show">
+                </div>
+            </div>
+            <div class="btn-row clearfix">
+                <div class="sh_title left">H5应用</div>
+                <div class="left">
+                    <input type="button" value="查看详情" class="btn btn-primary">
+                    <img src="" class="upimg" id="show">
+                </div>
+            </div>
+
+        </div>
+
+        <div class="phposition">
+            <div class="corpname"><img src="images/corpname.jpg" id="corpname"></div>
+            <div class="scrollwrap mCustomScrollbar light" data-mcs-theme="minimal-dark">
+                <div class="banner">
+                    <div id="wrapper">
+                        <div id="slider-wrap">
+                            <ul id="slider">
+                                <li>
+                                    <img src="images/banner.png" width="100%" height="auto">
+                                </li>
+
+                                <li>
+                                    <img src="images/banner2.png" width="100%" height="auto">
+                                </li>
+
+                                <li>
+                                    <img src="images/banner3.png" width="100%" height="auto">
+                                </li>
+                            </ul>
+                            <div id="pagination-wrap">
+                                <ul>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="topnews"></div>
+                <ul id="sortable2" class="droptrue sortable2 clearfix">
+                    <li><span class="left kf"></span>
+                        <div class="left">客服</div>
+                    </li>
+                    <li><span class="left fk"></span>
+                        <div class="left">访客</div>
+                    </li>
+                    <li><span class="left zh"></span>
+                        <div class="left">账户</div>
+                    </li>
+                    <li class="ui-state-disabled scanbox"><span class="left scan"></span>
+                        <div class="left">扫一扫</div>
+                    </li>
+                </ul>
+                <div class="apps"><span></span>认证应用</div>
+                <ul id="sortable3" class="droptrue1 sortable3">
+                    <li><span class="left txl"></span>
+                        <a class="close"></a>
+                        <div class="left">通讯录</div>
+                    </li>
+                    <li><span class="left wdkq"></span>
+                        <a class="close"></a>
+                        <div class="left">我的考勤</div>
+                    </li>
+                    <li><span class="left wqqd"></span>
+                        <a class="close"></a>
+                        <div class="left">外勤签到</div>
+                    </li>
+                    <li><span class="left tcjf"></span>
+                        <a class="close"></a>
+                        <div class="left">停车缴费</div>
+                    </li>
+                    <li><span class="left wybx"></span>
+                        <a class="close"></a>
+                        <div class="left">物业报修</div>
+                    </li>
+                    <li><span class="left cwyd"></span>
+                        <a class="close"></a>
+                        <div class="left">车位预定</div>
+                    </li>
+                    <li><span class="left zhtc"></span>
+                        <a class="close"></a>
+                        <div class="left">智慧停车</div>
+                    </li>
+                    <li><span class="left swgl"></span>
+                        <a class="close"></a>
+                        <div class="left">水务管理</div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <script src="js/jquery-1.11.3.js"></script>
+    <script src="js/jquery-ui.js"></script>
+    <script src="js/jquery.mCustomScrollbar.concat.min.js"></script>
+    <script src="js/slide.min.js"></script>
+    <script>
+        function upFile() {
+            var r = new FileReader();
+            f = document.getElementById('file').files[0];
+
+            r.readAsDataURL(f);
+            r.onload = function(e) {
+                document.getElementById('show').src = this.result;
+                document.getElementById('corpname').src = this.result;
+            };
+            $(".shop_btns").show();
+        }
+        
+//        修改H5选择项
+//        $(function(){
+//            $("#sortable2 li").eq(0).find("span").addClass("wdkq")
+//            $("#sortable2 li").eq(0).find("div.left").text("我的考勤")
+//        })
+//        $(function(){
+//            $("#sortable3 li").eq(0).find("span").addClass("wdkq")
+//            $("#sortable3 li").eq(0).find("div.left").text("我的考勤")
+//        })
+//        修改H5选择项结束
+     
+        $(function() {
+            var len = $("#sortable2 li").length;
+            if (len == 4) {
+                $("#sortable1").removeClass("droptrue").addClass("dropfalse")
+            } else if (len < 4) {
+                $("#sortable1").removeClass("dropfalse").addClass("droptrue")
+            }
+            $("#sortable2 li a.close").unbind("click").click(function() {
+                $(".error").hide();
+                $("#sortable1").removeClass("dropfalse").addClass("droptrue");
+                $("ul.droptrue").sortable({
+                    connectWith: ".droptrue",
+                    items: "li:not(.ui-state-disabled)",
+                    placeholder: "ui-state-highlight",
+                    beforeStop: function() {
+                        var unique = $("#sortable2>li").hasClass("type5");
+                        console.log(unique);
+                        if (unique == true) {
+                            $("#sortable1 .type5").addClass("mask");
+                            $("#sortable1").sortable({
+                                cancel: "li.type5",
+                            })
+                        } else {
+                            $("#sortable1 .type5").removeClass("mask");
+                            $("#sortable1").sortable({
+                                cancel: "",
+                            })
+                        }
+
+                        $("#sortable2 li a.close").unbind("click").click(function() {
+                            $(".error").hide();
+                            if ($(this).parent().hasClass("type5")) {
+                                $(".type5").removeClass("mask")
+                            }
+                            var node = $(this).parent().clone();
+                            $(this).parent().remove() && $(node).insertBefore("#sortable1 .add");
+                        });
+
+                    },
+                    stop: function() {
+                        var len = $("#sortable2 li").length;
+                        console.log(len);
+                        $(".error").show();
+                        if (len == 4) {
+                            $("#sortable2").sortable({
+                                cancel: "li"
+                            });
+                            $("#sortable1").sortable({
+                                cancel: "li"
+                            })
+                        }
+                        $("#sortable2 li a.close").unbind("click").click(function() {
+                            $(".error").hide();
+                            if ($(this).parent().hasClass("type5")) {
+                                $(".type5").removeClass("mask")
+                            }
+                            var node = $(this).parent().clone();
+                            $(this).parent().remove() && $(node).insertBefore("#sortable1 .add");
+                            var len = $("#sortable2 li").length;
+                            if (len < 4) {
+                                $("#sortable2").sortable({
+                                    cancel: ""
+                                });
+                                $("#sortable1").sortable({
+                                    cancel: ""
+                                })
+                            }
+                            var unique = $("#sortable2>li").hasClass("type5");
+                            alert(unique);
+                            if (unique == true) {
+                                $("#sortable1 .type5").addClass("mask");
+                                $("#sortable1").sortable({
+                                    cancel: "li.type5",
+                                })
+                            } else {
+                                $("#sortable1 .type5").removeClass("mask");
+                                $("#sortable1").sortable({
+                                    cancel: "",
+                                })
+                            }
+                        });
+                    }
+
+                });
+                var node = $(this).parent().clone();
+                $(this).parent().remove() && $(node).insertBefore("#sortable1 .add");
+                var len = $("#sortable2 li").length;
+                console.log(len)
+            });
+
+            $(".sortable1 li a.close").on("click", function() {
+                $(this).parent().remove();
+            });
+
+            $("ul.droptrue").sortable({
+                connectWith: ".droptrue",
+                items: "li:not(.ui-state-disabled)",
+                placeholder: "ui-state-highlight",
+                beforeStop: function() {
+                    var len = $("#sortable2 li").length;
+                    console.log(len)
+                    if (len >= 4) {
+                        $("#sortable1").removeClass("droptrue").addClass("dropfalse")
+                    } else if (len < 4) {
+                        $("#sortable1").removeClass("dropfalse").addClass("droptrue")
+                    }
+                    var unique = $("#sortable2>li").hasClass("type5");
+                    console.log(unique);
+                    if (unique == true) {
+                        console.log("type5");
+                        $("#sortable1 .type5").addClass("mask");
+                        $("#sortable1").sortable({
+                            items: "li:not(.mask)",
+                        })
+                    } else {
+                        $("#sortable1 .type5").removeClass("mask")
+                    }
+
+                    $("#sortable2 li a.close").unbind("click").click(function() {
+                        var len1 = $("#sortable2 li").length;
+                        alert(len1)
+                        if (len1 < 4) {
+                            $(".error").hide();
+                        }
+                        var node = $(this).parent().clone();
+                        $(this).parent().remove() && $(node).insertBefore("#sortable1 .add");
+                    });
+
+
+                },
+
+            });
+            $("ul.droptrue1").sortable({
+                connectWith: "ul.droptrue1",
+                placeholder: "ui-state-highlight",
+                beforeStop: function() {
+
+                    $("#sortable3 li a.close").unbind("click").click(function() {
+                        var node = $(this).parent().clone();
+                        $(this).parent().remove() && $(node).insertBefore("#sortable4 .add");
+
+                        $(".sortable1 li a.close").unbind("click").click(function() {
+                            $(this).parent().remove()
+                        });
+                    });
+                }
+            });
+
+            $("#sortable1, #sortable2, #sortable3").disableSelection();
+
+
+        });
+
+    </script>
+
+</body>
+
+</html>
