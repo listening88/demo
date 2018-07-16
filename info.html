@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=0">
+    <title>您即将拜访</title>
+    <link href="css/style.min.css" type="text/css" rel="stylesheet">
+</head>
+
+<body>
+    <div class="container">
+        <ul class="invite-info">
+            <li><a href="tel:18688888888"><span class="telephone"></span><span class="title">刘智明</span></a></li>
+            <li><span class="location"></span><span class="title">立方控股总部</span><div class="subinfo">文二西路780号西溪银座C座</div></li>
+        </ul>
+        <div class="split"></div>
+        <div class="authority"></div>
+        <div class="num"><span class="orange">12</span>个</div>
+        <div class="remaining">剩余时间：<span><span class="hours">71</span>:<span class="minutes">58</span>:<span class="seconds">23</span></span></div>
+        <div class="ewm">
+            <img src="images/ewm.png">
+        </div>
+        <div class="explain">
+            将二维码对准扫码头即可开门
+        </div>
+    </div>    
+    
+    <script type="text/javascript" src="js/jquery-1.11.3.js"></script>
+    <script>
+     var intDiff = parseInt(10);//倒计时总秒数量
+function timer(intDiff){
+    window.setInterval(function(){
+    var hour=0,
+        minute=0,
+        second=0;//时间默认值        
+    if(intDiff > 0){
+        hour = Math.floor(intDiff / (60 * 60));
+        minute = Math.floor(intDiff / 60) - (hour * 60);
+        second = Math.floor(intDiff) - (hour * 60 * 60) - (minute * 60);
+    }
+    if (hour <= 9) hour = '0' + hour;
+    if (minute <= 9) minute = '0' + minute;
+    if (second <= 9) second = '0' + second;
+    $('.hours').html(hour);
+    $('.minutes').html(minute);
+    $('.seconds').html(second);
+    if(intDiff==0){
+        alert("已到期")
+    }
+    intDiff--;
+    }, 1000);
+    
+} 
+$(function(){
+    timer(intDiff);
+    
+}); 
+    </script>
+</body>
+
+</html>

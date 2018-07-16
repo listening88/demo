@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=0">
+    <title>验证手机号码</title>
+    <link href="css/style.min.css" type="text/css" rel="stylesheet">
+</head>
+
+<body>
+    <div class="container">
+        <div class="banner"></div>
+        <div class="v-content">
+            <div class="v-title">请输入手机号中间四位</div>
+            <div class="v-telnmber">
+                <span class="v-tel-first"></span><input type="tel" class="fifth"><input type="tel" class="sixth"><input type="tel" class="seventh"><input type="tel" class="eighth"><span class="v-tel-last"></span>
+            </div>
+            <div class="v-botton"><input type="button" class="btn"></div>
+        </div>
+
+
+    </div>
+
+    
+    
+    <script type="text/javascript" src="js/jquery-1.11.3.js"></script>
+    <script>
+        $(function(){
+            var phone = "15120202653";
+            var telFirst = phone.substring(0, 4);
+            var telfifth=phone.substr(4, 1);
+            var telsixth=phone.substr(5, 1);
+            var telseventh=phone.substr(6, 1);
+            var teleighth=phone.substr(7, 1);
+            var telLast=phone.substr(8, 4);     
+            $(".v-tel-first").text(telFirst);
+            $(".v-tel-last").text(telLast)
+            
+            //判断是否匹配
+            function error(){
+                var divdom='<div class="shadow"><div class="stateform"><div class="stateicon failicon "></div><div class="stateinfo">匹配失败</div></div></div>'
+                $("body").append(divdom);
+                setInterval(function(){
+                    $(".shadow").remove()
+                },3000)
+            }
+            $(".btn").click(function(){
+                if($(".fifth").val()==telfifth && $(".sixth").val()==telsixth && $(".seventh").val()==telseventh && $(".eighth").val()==teleighth){
+                    console.log("匹配成功")
+                }else{
+                    error();
+                }
+            })
+            
+
+
+        })
+
+    </script>
+</body>
+
+</html>
